@@ -5,8 +5,7 @@ class Book(BaseModel):
     author: str
     current_page: int
     total_page: int
-    reading_time : int = 0
-    id: int
+    reading_time : int | None = 0
 
 class Book_update(BaseModel):
     current_page: int | None = None

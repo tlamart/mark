@@ -10,8 +10,7 @@ def book():
         "title": "test_title",
         "author": "test_author",
         "current_page": 0,
-        "total_page": 0,
-        "id": 4242
+        "total_page": 42
     }
     response = client.post("/books", json=data)
     book = response.json()
@@ -46,16 +45,17 @@ def test_post_books():
         "title": "test_title",
         "author": "test_author",
         "current_page": 0,
-        "total_page": 0,
-        "id": 4242
+        "total_page": 42
     }
     response = client.post("/books", json=data)
-    client.delete(f"/books/{data['id']}")
+    book = response.json()
+    client.delete(f"/books/{book['id']}")
     assert response.status_code == 200
-    assert response.json()["id"] == 4242
+    assert book["title"] == "test_title"
 
     data["author"] = 42
     response = client.post("/books", json=data)
+    print(response.json())
     assert response.status_code == 422
 
 
@@ -78,8 +78,7 @@ def test_delete_books_id():
             "title": "test_title",
             "author": "test_author",
             "current_page": 0,
-            "total_page": 0,
-            "id": 4242
+            "total_page": 42
         }
     book = client.post("/books", json=data).json()
     response = client.delete(f"/books/{book['id']}")
