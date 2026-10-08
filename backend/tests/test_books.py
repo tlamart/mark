@@ -3,10 +3,11 @@ from fastapi.testclient import TestClient
 from app.main import app
 from app.database import get_session
 from sqlmodel import Session, SQLModel, create_engine
-
+from pathlib import Path
 
 @pytest.fixture(name="session")
 def fixture_session():
+    Path("data").mkdir(exist_ok=True)
     sqlite_file_name = "./data/test.db"
     sqlite_url = f"sqlite:///{sqlite_file_name}"
 
