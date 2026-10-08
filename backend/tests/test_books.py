@@ -7,7 +7,7 @@ from sqlmodel import Session, SQLModel, create_engine
 
 @pytest.fixture(name="session")
 def fixture_session():
-    sqlite_file_name = "data/test.db"
+    sqlite_file_name = "./data/test.db"
     sqlite_url = f"sqlite:///{sqlite_file_name}"
 
     connect_args = {"check_same_thread": False}
